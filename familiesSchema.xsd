@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.myschema.by/families"
+		   xmlns:xl="http://www.myschema.by/families"
+	elementFormDefault="qualified">
+	<!-- xmlns - пространство имён для самой схемы -->
+	<!-- targetNamespace - целевое пространство имён -->
+	<!-- tns - маркер/префикс для дальнейшего использования в элементах -->
+	<!-- elementFormDefault="qualified" - надо будет всегда префиксы указывать -->
+
+	<xs:element name="families">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="family" type="xl:family" maxOccurs="unbounded"
+					minOccurs="0">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="family">
+		<xs:sequence>
+			<xs:element name="parents" type="xl:parents" maxOccurs="1"
+				minOccurs="1"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="parents">
+		<xs:sequence>
+			<xs:element name="mother" type="xl:mother" />
+			<xs:element name="father" type="xl:father" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="person">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="surname" type="xs:string" />
+			<xs:element name="age" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="mother">
+		<xs:complexContent>
+			<xs:extension base="xl:person">
+				<xs:sequence>
+					<xs:element name="maiden-name" type="xs:string" />
+					<xs:element name="children">
+						<xs:complexType>
+							<xs:attribute name="count" type="xs:int" />
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="father">
+		<xs:complexContent>
+			<xs:extension base="xl:person">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+</xs:schema>
